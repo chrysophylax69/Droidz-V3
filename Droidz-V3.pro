@@ -21,6 +21,24 @@ linux {
     SECP256K1_INCLUDE_PATH=/usr/local/include
 }
 
+windows{
+BOOST_LIB_SUFFIX=-mgw48-mt-s-1_53
+BOOST_INCLUDE_PATH=C:/deps/boost_1_53_0
+BOOST_LIB_PATH=C:/deps/boost_1_53_0/stage/lib
+BDB_INCLUDE_PATH=C:/deps/db-6.0.20.NC/build_unix
+BDB_LIB_PATH=C:/deps/db-6.0.20.NC/build_unix
+OPENSSL_INCLUDE_PATH=C:/deps/openssl-1.0.1g/include
+OPENSSL_LIB_PATH=C:/deps/openssl-1.0.1g
+MINIUPNPC_INCLUDE_PATH=C:/deps
+LIBPNG_INCLUDE_PATH=C:/deps/libpng-1.6.10
+LIBPNG_LIB_PATH=C:/deps/libpng-1.6.10/.libs
+MINIUPNPC_LIB_PATH=C:/deps/miniupnpc
+QRENCODE_INCLUDE_PATH=C:/deps/qrencode-3.4.3
+QRENCODE_LIB_PATH=C:/deps/qrencode-3.4.3/.libs
+SECP256K1_INCLUDE_PATH=C:/deps/secp256k1/include
+SECP256K1_LIB_PATH=C:/deps/secp256k1/.libs
+}
+
 # for boost 1.37, add -mt to the boost libraries
 # use: qmake BOOST_LIB_SUFFIX=-mt
 # for boost thread win32 with _win32 sufix
