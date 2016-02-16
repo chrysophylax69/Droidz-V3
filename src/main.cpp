@@ -1155,10 +1155,6 @@ int64_t GetProofOfWorkReward(int nHeight, int64_t nFees)
     {
         nSubsidy = 5500000 * COIN;
     }
-	if (nHeight == 16850)
-    {
-        nSubsidy = 2500000 * COIN;
-    }
 	
     return nSubsidy + nFees;
 }
@@ -1170,6 +1166,12 @@ int64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, i
     nRewardCoinYear = MAX_MINT_PROOF_OF_STAKE;
 
     int64_t nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
+	
+	if(pindexBest->nHeight == 23820)
+    {
+        nSubsidy = 2500000 * COIN;
+		return nSubsidy + nFees;
+    }
 
     return nSubsidy + nFees;
 }
@@ -2449,9 +2451,12 @@ bool CBlock::AcceptBlock()
         return DoS(10, error("AcceptBlock() : prev block not found"));
     CBlockIndex* pindexPrev = (*mi).second;
     int nHeight = pindexPrev->nHeight+1;
+	
+	if (IsProofOfWork() && nHeight > Params().LastPOWBlock())
+        return DoS(100, error("AcceptBlock() : reject proof-of-work at height %d", nHeight));
 
-    if (IsProofOfStake() && nHeight < Params().POSStartBlock())
-          return DoS(100, error("AcceptBlock() : reject proof-of-stake at height <= %d", nHeight));
+        if (IsProofOfStake() && nHeight < Params().POSStartBlock())
+        return DoS(100, error("AcceptBlock() : reject proof-of-stake at height <= %d", nHeight));
 
     // Check coinbase timestamp
     if (GetBlockTime() > FutureDrift((int64_t)vtx[0].nTime) && IsProofOfStake())
