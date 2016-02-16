@@ -4,7 +4,7 @@ VERSION = 3.0.0.0
 INCLUDEPATH += src src/json src/secp256k1/include src/qt src/qt/plugins/mrichtexteditor
 QT += core gui network printsupport
 DEFINES += ENABLE_WALLET
-DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
+DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE BOOST_VARIANT_USE_RELAXED_GET_BY_DEFAULT
 CONFIG += no_include_pwd
 CONFIG += thread
 CONFIG += static
@@ -19,6 +19,24 @@ greaterThan(QT_MAJOR_VERSION, 4) {
 linux {
     SECP256K1_LIB_PATH=/usr/local/lib
     SECP256K1_INCLUDE_PATH=/usr/local/include
+}
+
+windows{
+BOOST_LIB_SUFFIX=-mgw48-mt-s-1_53
+BOOST_INCLUDE_PATH=C:/deps/boost_1_53_0
+BOOST_LIB_PATH=C:/deps/boost_1_53_0/stage/lib
+BDB_INCLUDE_PATH=C:/deps/db-6.0.20.NC/build_unix
+BDB_LIB_PATH=C:/deps/db-6.0.20.NC/build_unix
+OPENSSL_INCLUDE_PATH=C:/deps/openssl-1.0.1g/include
+OPENSSL_LIB_PATH=C:/deps/openssl-1.0.1g
+MINIUPNPC_INCLUDE_PATH=C:/deps
+LIBPNG_INCLUDE_PATH=C:/deps/libpng-1.6.10
+LIBPNG_LIB_PATH=C:/deps/libpng-1.6.10/.libs
+MINIUPNPC_LIB_PATH=C:/deps/miniupnpc
+QRENCODE_INCLUDE_PATH=C:/deps/qrencode-3.4.3
+QRENCODE_LIB_PATH=C:/deps/qrencode-3.4.3/.libs
+SECP256K1_INCLUDE_PATH=C:/deps/secp256k1/include
+SECP256K1_LIB_PATH=C:/deps/secp256k1/.libs
 }
 
 # for boost 1.37, add -mt to the boost libraries
