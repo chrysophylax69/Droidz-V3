@@ -33,7 +33,7 @@ GLOBAL sph_echo512_context		z_echo;
 } while (0) 
 
 template<typename T1>
-inline uint256 HashBlocks(const T1 pbegin, const T1 pend)
+inline uint256 Hash5(const T1 pbegin, const T1 pend)
 
 {
     sph_luffa512_context	 ctx_luffa;
