@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = Droidz-V3
-VERSION = 3.0.0.0
+VERSION = 3.0.2.0
 INCLUDEPATH += src src/json src/secp256k1/include src/qt src/qt/plugins/mrichtexteditor
 QT += core gui network printsupport
 DEFINES += ENABLE_WALLET
@@ -35,8 +35,8 @@ LIBPNG_LIB_PATH=C:/deps/libpng-1.6.10/.libs
 MINIUPNPC_LIB_PATH=C:/deps/miniupnpc
 QRENCODE_INCLUDE_PATH=C:/deps/qrencode-3.4.3
 QRENCODE_LIB_PATH=C:/deps/qrencode-3.4.3/.libs
-SECP256K1_INCLUDE_PATH=C:/deps/secp256k1/include
-SECP256K1_LIB_PATH=C:/deps/secp256k1/.libs
+SECP256K1_INCLUDE_PATH=C:/Droidz-V3/src/secp256k1
+SECP256K1_LIB_PATH=C:/Droidz-V3/src/secp256k1/.libs
 }
 
 # for boost 1.37, add -mt to the boost libraries
