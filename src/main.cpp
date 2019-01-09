@@ -42,10 +42,10 @@ set<pair<COutPoint, unsigned int> > setStakeSeen;
 
 CBigNum bnProofOfStakeLimit(~uint256(0) >> 20);
 
-unsigned int nStakeMinAge = 3 * 60 * 60; // 3 hours
+unsigned int nStakeMinAge = 10 * 60; // 3 hours
 unsigned int nModifierInterval = 10 * 60; // time to elapse before new modifier is computed
 
-int nCoinbaseMaturity = 100;
+int nCoinbaseMaturity = 10;
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
 
@@ -2594,25 +2594,10 @@ bool ProcessBlock(CNode* pfrom, CBlock* pblock)
 
     // Check for duplicate
     uint256 hash = pblock->GetHash();
-    if (mapBlockIndex.count(hash)) {
-        if (pfrom) {
-            pfrom->nDupBlocks++;
-            if (pfrom->nDupBlocks > 3) pfrom->fDisconnect = true;
-            printf("ProcessBlock() : already(%d) have block %d %s", pfrom->nDupBlocks, mapBlockIndex[hash]->nHeight, hash.ToString().substr(0,20).c_str());
-        } else
-            printf("ProcessBlock() : already have block %d %s", mapBlockIndex[hash]->nHeight, hash.ToString().substr(0,20).c_str());
-        return false;
-    }
-    if (mapOrphanBlocks.count(hash)) {
-        if (pfrom) {
-            pfrom->nDupBlocks++;
-            if (pfrom->nDupBlocks > 3) pfrom->fDisconnect = true;
-            printf("ProcessBlock() : already(%d) have block (orphan) %s", pfrom->nDupBlocks, hash.ToString().substr(0,20).c_str());
-        } else
-            printf("ProcessBlock() : already have block (orphan) %s", hash.ToString().substr(0,20).c_str());
-        return false;
-    }
-    if (pfrom) pfrom->nDupBlocks = 0; // reset the counter
+    if (mapBlockIndex.count(hash))
+        return error("ProcessBlock() : already have block %d %s", mapBlockIndex[hash]->nHeight, hash.ToString());
+    if (mapOrphanBlocks.count(hash))
+        return error("ProcessBlock() : already have block (orphan) %s", hash.ToString());
 
     // ppcoin: check proof-of-stake
     // Limited duplicity on stake: prevents block flood attack

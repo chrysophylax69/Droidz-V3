@@ -6,10 +6,12 @@
 #include "darksend.h"
 #include "main.h"
 #include "init.h"
+//#include "script/sign.h"
 #include "util.h"
 #include "masternode.h"
 #include "instantx.h"
 #include "ui_interface.h"
+//#include "random.h"
 
 #include <openssl/rand.h>
 
@@ -1983,7 +1985,7 @@ bool CDarkSendSigner::IsVinAssociatedWithPubkey(CTxIn& vin, CPubKey& pubkey){
     //if(GetTransaction(vin.prevout.hash, txVin, hash, true)){
     if(GetTransaction(vin.prevout.hash, txVin, hash)){
         BOOST_FOREACH(CTxOut out, txVin.vout){
-            if(out.nValue == GetMNCollateral(pindexBest->nHeight)*COIN){
+            if(out.nValue == 1000*COIN){
                 if(out.scriptPubKey == payee2) return true;
             }
         }
